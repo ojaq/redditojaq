@@ -6,6 +6,7 @@ use App\Http\Resources\PostDetailResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,10 +17,20 @@ class PostController extends Controller
 
     public function show($id){
         try {
-        $post = Post::with('writer:id,username')->findOrFail($id);
+        $post = Post::with('redditor:id,username')->findOrFail($id);
         return new PostDetailResource($post);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Post not found'], 404);
         }
     } 
+
+    public function store(Request $request){
+        $request ->validate([
+            'post_title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+        $request['redditor'] = Auth::user()->id;
+        $post = Post::create($request->all());
+        return new PostDetailResource($post->loadMissing('redditor:id,username'));
+    }
 }
