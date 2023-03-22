@@ -33,4 +33,15 @@ class PostController extends Controller
         $post = Post::create($request->all());
         return new PostDetailResource($post->loadMissing('redditor:id,username'));
     }
+    
+    public function update(Request $request, $id){
+        $request -> validate([
+            'post_title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+
+        return new PostDetailResource($post->loadMissing('redditor:id,username'));
+    }
 }
