@@ -20,6 +20,7 @@ class PostDetailResource extends JsonResource
             'post_title' => $this->post_title,
             'content' => $this->content,
             'redditor_id' => $this->redditor,
+            'redditor' => $this->whenLoaded('redditor'),
             'created_at' => $this->created_at,
         ];
 
