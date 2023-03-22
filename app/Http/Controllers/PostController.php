@@ -44,4 +44,13 @@ class PostController extends Controller
 
         return new PostDetailResource($post->loadMissing('redditor:id,username'));
     }
+
+    public function delete($id){
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return response()->json([
+            'message' => "deleted!"
+        ]);
+    }
 }

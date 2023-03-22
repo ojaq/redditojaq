@@ -21,7 +21,7 @@ class PostOwner
         $currentUser  = Auth::user();
         $post = Post::findOrFail($request->id);
 
-        if ($post -> author != $currentUser->id) {
+        if ($post -> redditor != $currentUser->id) {
             return response()->json([
                 'message' => 'data not found'
             ], 404);
