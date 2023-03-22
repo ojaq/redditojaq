@@ -15,7 +15,11 @@ class PostController extends Controller
     }
 
     public function show($id){
+        try {
         $post = Post::with('writer:id,username')->findOrFail($id);
         return new PostDetailResource($post);
-    }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+    } 
 }
