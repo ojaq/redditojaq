@@ -89,8 +89,7 @@ class PostController extends Controller
         return $randomString;
     }
 
-    public function search(Request $request)
-{
+    public function search(Request $request){
     $searchQuery = $request->input('q');
 
     $posts = Post::where('post_title', 'like', '%'.$searchQuery.'%')
@@ -102,5 +101,5 @@ class PostController extends Controller
     }
 
     return response()->json($posts);
-}
+    }
 }
