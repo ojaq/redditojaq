@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->string('image', 255)->nullable()->after('post_title');
         });
-
-        Schema::table('comments', function (Blueprint $table) {
-            $table->string('image', 255)->nullable()->after('comments_content');
-        });
     }
 
     /**
