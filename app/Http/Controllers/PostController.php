@@ -93,8 +93,8 @@ class PostController extends Controller
 {
     $searchQuery = $request->input('q');
 
-    $posts = Post::where('post_title', '%'.$searchQuery.'%')
-                 ->orWhere('content', '%'.$searchQuery.'%')
+    $posts = Post::where('post_title', 'like', '%'.$searchQuery.'%')
+                 ->orWhere('content', 'like', '%'.$searchQuery.'%')
                  ->get();
 
     if ($posts->isEmpty()) {
