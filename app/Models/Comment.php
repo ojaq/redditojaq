@@ -16,11 +16,11 @@ class Comment extends Model
     ];
 
     /**
-     * Get the commentator that owns the Comment
+     * Get the commenter that owns the Comment
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function commentator(): BelongsTo
+    public function commenter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }

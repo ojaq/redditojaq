@@ -12,15 +12,15 @@ class PostController extends Controller
 {
     public function index(){
         $posts = Post::all();
-        return PostResource::collection($posts);
+        return PostDetailResource::collection($posts->loadMissing('redditor:id,username', 'comments:id,post_id,user_id,comments_content'));
     }
 
     public function show($id){
         try {
-        $post = Post::with('redditor:id,username')->findOrFail($id);
+        $post = Post::with('redditor:id,username', 'comments:id,post_id,user_id,comments_content')->findOrFail($id);
         return new PostDetailResource($post);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['message' => 'Post not found'], 404);
+            return response()->json(['message' => 'post not found'], 404);
         }
     } 
 

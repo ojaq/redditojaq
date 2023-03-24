@@ -17,7 +17,7 @@ class CommentController extends Controller
         $request['user_id'] = auth()->user()->id;
         $comment = Comment::create($request->all());
 
-        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+        return new CommentResource($comment->loadMissing(['commenter:id,username']));
     }
 
     public function update(Request $request, $id)
@@ -29,13 +29,13 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->update($request->only('comment_content'));
 
-        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+        return new CommentResource($comment->loadMissing(['commenter:id,username']));
     }
 
     public function delete($id){
         $comment = Comment::findOrFail($id);
         $comment->delete();
 
-        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+        return new CommentResource($comment->loadMissing(['commenter:id,username']));
     }
 }
