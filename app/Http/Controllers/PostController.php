@@ -88,4 +88,19 @@ class PostController extends Controller
         }
         return $randomString;
     }
+
+    public function search(Request $request)
+{
+    $searchQuery = $request->input('q');
+
+    $posts = Post::where('post_title', '%'.$searchQuery.'%')
+                 ->orWhere('content', '%'.$searchQuery.'%')
+                 ->get();
+
+    if ($posts->isEmpty()) {
+        return response()->json(['error' => 'No posts found'], 404);
+    }
+
+    return response()->json($posts);
+}
 }
