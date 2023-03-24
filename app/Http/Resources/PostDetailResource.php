@@ -21,7 +21,6 @@ class PostDetailResource extends JsonResource
             'image' => $this->image,
             'content' => $this->content,
             'redditor_id' => $this->redditor,
-            'redditor' => $this->whenLoaded('redditor'),
             'comments_total' => $this->whenLoaded('comments', function(){
                 return count($this->comments);
             }),
