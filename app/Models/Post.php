@@ -16,13 +16,14 @@ class Post extends Model
         'post_title',
         'content',
         'redditor',
+        'image',
     ];
 
     public function redditor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'redditor', 'id');
     }
-    
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'post_id', 'id');
