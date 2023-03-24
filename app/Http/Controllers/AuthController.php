@@ -68,6 +68,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => true,
                 'user'    => $user,  
+                'token'    => $user->createToken('registered!')->plainTextToken
             ], 201);
         }
 
