@@ -29,6 +29,9 @@ Route::middleware(['auth:sanctum'])->group(function (){
     Route::patch('/comment/{id}', [CommentController::class, 'update'])->middleware('comment.owner');
     Route::delete('/comment/{id}', [CommentController::class, 'delete'])->middleware('comment.owner');
 
+    Route::post('/posts/{id}/upvote', [PostController::class, 'upvote']);
+    Route::post('/posts/{id}/unvote', [PostController::class, 'unvote']);
+
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 });

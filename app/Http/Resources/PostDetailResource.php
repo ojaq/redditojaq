@@ -30,6 +30,15 @@ class PostDetailResource extends JsonResource
                     return $comment;
                 });
             }),
+            'upvotes_total' => $this->whenLoaded('votes', function(){
+                return count($this->votes);
+            }),
+            'upvotes' => $this->whenLoaded('votes', function(){
+                return collect($this->votes)->each(function($upvotes){
+                    $upvotes->supvotes;
+                    return $upvotes;
+                });
+            }),
             'created_at' => $this->created_at,
         ];
 

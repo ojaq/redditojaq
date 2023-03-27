@@ -18,7 +18,15 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'post_title' => $this->post_title,
+            'image' => $this->image,
             'content' => $this->content,
+            'redditor_id' => $this->redditor,
+            'comments_total' => $this->whenLoaded('comments', function(){
+                return count($this->comments);
+            }),
+            'upvotes_total' => $this->whenLoaded('votes', function(){
+                return count($this->votes);
+            }),
             'created_at' => $this->created_at,
         ];
 
