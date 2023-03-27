@@ -93,11 +93,11 @@ class PostController extends Controller
     }
 
     public function search(Request $request){
-    $searchQuery = $request->input('q');
+        $search = $request->input('q');
 
-    $posts = Post::where('post_title', 'like', '%'.$searchQuery.'%')
-                 ->orWhere('content', 'like', '%'.$searchQuery.'%')
-                 ->get();
+        $posts = Post::where('post_title', 'like', '%'.$search.'%')
+                    ->orWhere('content', 'like', '%'.$search.'%')
+                    ->get();
 
     if ($posts->isEmpty()) {
         return response()->json(['error' => 'No posts found'], 404);
