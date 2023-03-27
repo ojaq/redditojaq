@@ -27,7 +27,6 @@ class PostResource extends JsonResource
             'upvotes_total' => $this->whenLoaded('votes', function(){
                 return count($this->votes);
             }),
-            'created_at' => $this->created_at,
         ];
 
     }

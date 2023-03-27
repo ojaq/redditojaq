@@ -39,7 +39,6 @@ class PostDetailResource extends JsonResource
                     return $upvotes;
                 });
             }),
-            'created_at' => $this->created_at,
         ];
 
     }
