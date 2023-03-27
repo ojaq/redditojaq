@@ -37,10 +37,16 @@ class PostController extends Controller
 
         $image = null;
         if ($request -> file) {
+            $extensionfr = ['jpg', 'jpeg', 'png'];
             $fileName = $this->generateRandomString();
             $extension = $request->file->extension();
-
             $image = $fileName. '.' .$extension;
+
+            if(!in_array($extension, $extensionfr)){
+                return response()->json([
+                    "message" => "only image are allowed"
+                ]);
+            }
             Storage::putFileAs('image', $request->file, $image);
         }
         $request['image'] = $image;
