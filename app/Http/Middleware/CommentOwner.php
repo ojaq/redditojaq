@@ -23,7 +23,7 @@ class CommentOwner
 
         if ($comment->user_id != $user->id) {
             return response()->json([
-                'message' => 'data not found'
+                'message' => 'its not yours'
             ], 404);
         }
         return $next($request);

@@ -23,7 +23,7 @@ class PostOwner
 
         if ($post -> redditor != $currentUser->id) {
             return response()->json([
-                'message' => 'data not found'
+                'message' => 'its not yours'
             ], 404);
         }
 
