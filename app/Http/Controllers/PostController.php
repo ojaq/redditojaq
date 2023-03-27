@@ -65,10 +65,16 @@ class PostController extends Controller
 
         $image = null;
         if ($request -> file) {
+            $extensionfr = ['jpg', 'jpeg', 'png'];
             $fileName = $this->generateRandomString();
             $extension = $request->file->extension();
-
             $image = $fileName. '.' .$extension;
+
+            if(!in_array($extension, $extensionfr)){
+                return response()->json([
+                    "message" => "only image are allowed"
+                ]);
+            }
             Storage::putFileAs('image', $request->file, $image);
         }
         $request['image'] = $image;
@@ -106,7 +112,7 @@ class PostController extends Controller
                     ->get();
 
     if ($posts->isEmpty()) {
-        return response()->json(['error' => 'No posts found'], 404);
+        return response()->json(['error' => 'no posts found'], 404);
     }
 
     return response()->json($posts);
